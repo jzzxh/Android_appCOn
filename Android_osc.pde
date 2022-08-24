@@ -1,9 +1,10 @@
-
+import android.os.Environment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import java.io.File;
 
 import oscP5.*;
 import netP5.*;
@@ -19,8 +20,7 @@ boolean openState = true;
 
 void setup() {
   fullScreen(P2D);
-  //fill(255,0,0);
-  //ellipse(width/2, height/2, 50, 50);
+
   //noLoop();
   //frameRate(25);
   /* start oscP5, listening for incoming messages at port 12000 */
@@ -31,6 +31,26 @@ void setup() {
   smooth();
   textAlign(CENTER);
   textSize(55);
+
+  // test file path
+  //File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+  String file = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+  //String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+  File fl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+  String folder_download = "vrFiles";
+  File fd = new File(fl,folder_download);
+  if(!fd.exists()){
+    fd.mkdirs(); 
+  }
+  
+  String file2 = fl.getAbsolutePath();
+  println(file2);
+  //File[] files = fl.listFiles();
+  //for (int i = 0; i < files.length; i++) {
+  //  println(files[i].getName());
+  //}
+
+  //File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
 }
 
 
@@ -73,15 +93,15 @@ void oscEvent(OscMessage theOscMessage) {
 
       if (_val == 1 && openState) {
         Context context = surface.getContext();
-        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("processing.test.words");
+        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.jzzxh.VR360_1111");
         if (launchIntent != null) {
           launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           startActivity(launchIntent);//null pointer check in case package name was not found
         }
 
         println(launchIntent);
-        
-        //close all activity & task list
+
+        //kill all activity & task list
         getActivity().finishAndRemoveTask();
         //int pid = android.os.Process.myPid();
         //android.os.Process.killProcess(pid);
