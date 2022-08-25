@@ -240,6 +240,60 @@
               <p:buttonmode p:Assembly="VL.UI.Forms" p:Type="VL.HDE.PatchEditor.Editors.ButtonModeEnum">Bang</p:buttonmode>
             </p:ValueBoxSettings>
           </Pad>
+          <Pad Id="Qgtlw6P0XmkQBUEPUQGpSo" Comment="Address" Bounds="67,621,88,8" ShowValueBox="true" isIOBox="true" Value="/download">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Node Bounds="44,672,85,26" Id="SpZy9kw2lCkLRin1b3fNpe">
+            <p:NodeReference LastCategoryFullName="IO.OSC.OSCClient" LastSymbolSource="VL.IO.OSC.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="SendMessage" />
+            </p:NodeReference>
+            <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
+            <Pin Id="GzicGhXeFeSPX8VZISmN7H" Name="Input" Kind="StateInputPin" />
+            <Pin Id="PzbzmUglWS0OGS01yQcNbi" Name="Address" Kind="InputPin" />
+            <Pin Id="KO0NEWRSrBhMOb7YHUy73B" Name="Arguments" Kind="InputPin" />
+            <Pin Id="UoTAYxN5TAMPYNUjgMzWeA" Name="Bundled Per Frame" Kind="InputPin" DefaultValue="True">
+              <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+                <Choice Kind="TypeFlag" Name="Boolean" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="AzVg53EiYNrK9i1psg1F10" Name="Apply" Kind="InputPin" />
+            <Pin Id="AH722yXorAmM42WRVMw4oY" Name="Output" Kind="StateOutputPin" />
+          </Node>
+          <Pad Id="CcpmdfUyrz2Lc42rs59Sy0" Comment="Apply" Bounds="149,650,35,35" ShowValueBox="true" isIOBox="true" Value="True">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="TypeFlag" Name="Boolean" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Pad Id="MeWz2VcdRsgOuuVmNWJTEJ" Comment="Arguments" Bounds="8,594,35,15" ShowValueBox="true" isIOBox="true" Value="0">
+            <p:TypeAnnotation>
+              <Choice Kind="ImmutableTypeFlag" Name="Integer32" />
+              <FullNameCategoryReference ID="Primitive" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Node Bounds="7,508,65,19" Id="FNOIzdqftgGMBcWkN9vzEs">
+            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="MonoFlop" />
+            </p:NodeReference>
+            <Pin Id="Jjg6Bb42ACbN0gqn2D3YcF" Name="Set" Kind="InputPin" />
+            <Pin Id="TLQkTfUoqkDO4Ge5e75cxa" Name="Time" Kind="InputPin" />
+            <Pin Id="PZzMAJRCx0OOJdIA8hNVTC" Name="Retriggerable" Kind="InputPin" />
+            <Pin Id="EdZ16dZH2wSQCebKrVXAxh" Name="Reset" Kind="InputPin" />
+            <Pin Id="RjHPx2X7TvBMUZLCwwa4Ci" Name="Value" Kind="OutputPin" />
+            <Pin Id="U3gA8Z1WeNwMUMVgWE2lHV" Name="Inverse Output" Kind="OutputPin" />
+          </Node>
+          <Pad Id="Jhzwwdel1ifPZTrjFpMPMa" Comment="Set" Bounds="9,444,35,35" ShowValueBox="true" isIOBox="true" Value="False">
+            <p:TypeAnnotation>
+              <Choice Kind="ImmutableTypeFlag" Name="Boolean" />
+              <FullNameCategoryReference ID="Primitive" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:buttonmode p:Assembly="VL.UI.Forms" p:Type="VL.HDE.PatchEditor.Editors.ButtonModeEnum">Bang</p:buttonmode>
+            </p:ValueBoxSettings>
+          </Pad>
         </Canvas>
         <Patch Id="FAMMem6QIRwL8X1AH9hBnB" Name="Create" />
         <Patch Id="FfkjD7adBn3Mmnz9bzbyqp" Name="Update" />
@@ -265,6 +319,12 @@
         <Link Id="C5StHcwbpf3NuXXocJJkLM" Ids="TBsfCDLcr6cPTgQxJWSAyL,RKv88q7FxqMMucTfpSKmeh" />
         <Link Id="AbTqO6uMeAMOdfCUpdNPOY" Ids="GHTDo20hOAaMCwB0bYTtVe,TBsfCDLcr6cPTgQxJWSAyL" />
         <Link Id="Rxy2pzdeUh8MSHmJhulRqO" Ids="OLhPCb0COBBMtsBJIXuSmT,P7me2SRvmUCLFrRstthaWA" />
+        <Link Id="EqTMbqAjXrgLZuPY1Mqkn0" Ids="Qgtlw6P0XmkQBUEPUQGpSo,PzbzmUglWS0OGS01yQcNbi" />
+        <Link Id="LEu2RHQJUkpMMbQBSTIujp" Ids="CcpmdfUyrz2Lc42rs59Sy0,AzVg53EiYNrK9i1psg1F10" />
+        <Link Id="S91ZeWneLinNTG2lYdjjHp" Ids="MeWz2VcdRsgOuuVmNWJTEJ,KO0NEWRSrBhMOb7YHUy73B" />
+        <Link Id="GI6AuAJVRTBMgpRWPyRScO" Ids="RjHPx2X7TvBMUZLCwwa4Ci,MeWz2VcdRsgOuuVmNWJTEJ" />
+        <Link Id="QyXPwsXhtVULoTgksjnVaC" Ids="Jhzwwdel1ifPZTrjFpMPMa,Jjg6Bb42ACbN0gqn2D3YcF" />
+        <Link Id="H2DJlX1vZuKNePbtqwRnIM" Ids="IjLoyefJUjcLOA3jkIVLpY,GzicGhXeFeSPX8VZISmN7H" />
       </Patch>
     </Node>
   </Patch>

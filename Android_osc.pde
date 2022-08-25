@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.app.DownloadManager;
+import android.net.Uri;
 import java.io.File;
 
 import oscP5.*;
@@ -17,6 +19,7 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 
 boolean openState = true;
+boolean downState = true;
 
 void setup() {
   fullScreen(P2D);
@@ -34,17 +37,28 @@ void setup() {
 
   // test file path
   //File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
-  String file = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+  //String file = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
   //String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-  File fl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-  String folder_download = "vrFiles";
-  File fd = new File(fl,folder_download);
-  if(!fd.exists()){
-    fd.mkdirs(); 
-  }
-  
-  String file2 = fl.getAbsolutePath();
-  println(file2);
+
+  //Context context = surface.getContext();
+  //File fl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+  //String folder_download = "vrFiles";
+  //File fd = new File(fl, folder_download);
+  //File fvid = new File(fd, "BigBuckBunny.mp4");
+  //String vpath = "http://192.168.0.224/vid/BigBuckBunny.mp4";
+  //DownloadManager.Request request = new DownloadManager.Request(Uri.parse(vpath)).setTitle("BigBuckBunny").setDescription("Downloading")
+  //  //.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI)
+  //  .setAllowedOverMetered(false)
+  //  .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED).setDestinationUri(Uri.fromFile(fvid)).setAllowedOverRoaming(false);
+  //DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(context.DOWNLOAD_SERVICE);
+  //downloadManager.enqueue(request);
+  //println(downloadManager);
+  //if(!fd.exists()){
+  //  fd.mkdirs();
+  //}
+
+  //String file2 = fl.getAbsolutePath();
+  //println(file2);
   //File[] files = fl.listFiles();
   //for (int i = 0; i < files.length; i++) {
   //  println(files[i].getName());
@@ -106,6 +120,34 @@ void oscEvent(OscMessage theOscMessage) {
         //int pid = android.os.Process.myPid();
         //android.os.Process.killProcess(pid);
         openState = false;
+      }
+
+      return;
+    }
+  }
+
+  // Download Test
+  if (theOscMessage.checkAddrPattern("/download")==true) {
+    /* check if the typetag is the right one. */
+    if (theOscMessage.checkTypetag("i")) {
+      int _val = theOscMessage.get(0).intValue();  // get the first osc argument
+
+      if (_val == 1 && downState) {
+        Context context = surface.getContext();
+        File fl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        String folder_download = "vrFiles";
+        File fd = new File(fl, folder_download);
+        File fvid = new File(fd, "BigBuckBunny.mp4");
+        String vpath = "http://vrvideo.down/BigBuckBunny.mp4";
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(vpath)).setTitle("BigBuckBunny").setDescription("Downloading")
+          //.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI)
+          .setAllowedOverMetered(false)
+          .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED).setDestinationUri(Uri.fromFile(fvid)).setAllowedOverRoaming(false);
+        DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(context.DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+        println(downloadManager);
+
+        downState = false;
       }
 
       return;
